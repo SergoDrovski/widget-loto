@@ -1,8 +1,12 @@
 import { createRoot } from "react-dom/client"
-import './styles/index.scss';
+import { Provider } from 'react-redux';
+
 import App from './App.jsx';
 import store from './store';
-import { Provider } from 'react-redux';
+import  './api/fakeServer'
+
+import './styles/index.scss';
+import './styles/common/default.scss';
 
 const container = document.getElementById("root")
 
