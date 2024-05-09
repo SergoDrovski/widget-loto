@@ -1,0 +1,17 @@
+@import 'variables';
+@import 'fonts';
+@import 'normalize';
+
+body {
+  font-family: 'Poppins', 'Arial', sans-serif;
+  font-size: 22px;
+  line-height: 36px;
+  font-weight: 500;
+  color: $main-color;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
