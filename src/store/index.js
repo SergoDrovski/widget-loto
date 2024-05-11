@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../components/counter/counterSlice';
+import fieldsSlice from '@/components/ticket/fieldsSlice';
+import wonStatusSlice from "@/components/ticket/wonTicketSlice.js"
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    fields: fieldsSlice,
+    wonStatus: wonStatusSlice
   },
 });
