@@ -1,0 +1,156 @@
+.ticket {
+
+  &__card {
+    max-width: 440px;
+    padding: 0 12px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 17px 12px 15px;
+    background-color: #201e2f;
+    overflow: hidden;
+
+    .title {
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    .clue {
+      display: flex;
+      cursor: pointer;
+      transition: all 0.6s;
+
+      &:hover {
+        svg path {
+          fill: yellow;
+        }
+      }
+    }
+    .clue-text {
+      position: absolute;
+      transform: translateX(180px);
+      transition: all 0.4s;
+      font-size: 16px;
+    }
+  }
+
+  // content
+  &__content {
+    .content-wrapper {
+      padding: 15px 12px 15px;
+      border-top: 1px solid #0b0a12;
+      background-color: #201e2f;
+    }
+  }
+
+  // field
+  .field-wrapper {
+    margin-bottom: 30px;
+  }
+
+  .field-title {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .mark-numbers {
+    margin-left: 15px;
+    position: relative;
+  }
+
+  .check-mark {
+    position: absolute;
+    content: "";
+    background-image: url(/done.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    right: -30px;
+    top: 0px;
+  }
+
+  .field {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    justify-content: space-between;
+    @media (min-width: 440px) {
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+    }
+  }
+  .slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dotted rgb(105 100 1 / 74%);
+    aspect-ratio: 1;
+    background-color: #312e3f;
+    transition: all 0.6s;
+    cursor: pointer;
+
+    &:hover,
+    &.selected {
+      background-color: rgb(255 243 0 / 89%);
+      color: #201e2f;
+      border: 1px solid rgb(105 100 1 / 74%);
+    }
+    &.won {
+      background-color: rgb(147 235 34 / 89%);
+      color: #201e2f;
+      border: 1px solid rgb(64 105 1 / 74%);
+    }
+  }
+
+
+  &__button-wrapper {
+    background-color: #201e2f;
+    padding: 15px 12px 25px;
+  }
+  &__button {
+    display: block;
+    max-width: 250px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: #312e3f;
+    transition: all 0.6s;
+    cursor: pointer;
+    &--disabled {
+      background-color: #535353;
+      color: #7f7d7d;
+    }
+    &:hover {
+      background-color: rgb(255 243 0 / 89%);
+      color: #201e2f;
+    }
+  }
+}
+
+.winner-modal {
+  min-height: 300px;
+  margin-top: 12px;
+  &__wrapper {
+    padding: 15px 12px 15px;
+    border-top: 1px solid #0b0a12;
+    background-color: #201e2f;
+    min-height: 300px;
+  }
+  .title {
+    margin-bottom: 20px;
+  }
+}
