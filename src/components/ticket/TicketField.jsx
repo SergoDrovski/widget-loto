@@ -1,7 +1,6 @@
-import { useState } from "react"
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { useDispatch, useSelector } from "react-redux"
-import { addSelected, deleteSelected } from "@/components/ticket/fieldsSlice.js"
+import { addSelected, deleteSelected, updateStatus } from "@/components/ticket/fieldsSlice.js"
 
 
 export default function TicketField(
@@ -9,42 +8,56 @@ export default function TicketField(
     fieldName,
     fieldNumber,
     textRule,
-    fieldOption = {
-      lengthSlots: 19,
-      rule: 8,
-      wonSlots: []
-    }
+    lengthSlots = 19,
+    rule = 8,
   }) {
+
+  const {status, numbers} = useSelector(state => state.fields[fieldName]);
+
+  if(numbers.length > 0) {
+    textRule = `Осталось ещё ${rule - numbers.length}.`
+  }
+
+  if(numbers.length === rule) {
+    textRule = 'Готово!'
+  }
 
   return (
     <div className="field-wrapper">
       <p className="field-title"> Поле {fieldNumber}
         <span className="mark-numbers">{textRule}
-          <span className="check-mark"></span>
+            <span className={status ? "check-mark" : ''}></span>
         </span>
       </p>
-      <FieldSlotsList fieldName={fieldName} option={fieldOption} />
+      <FieldSlotsList option={{fieldName, lengthSlots, rule}}/>
+
     </div>
   )
 }
 
-function FieldSlotsList({ fieldName, option }) {
+function FieldSlotsList({ option }) {
   const {
+    fieldName,
     lengthSlots,
     rule
   } = option
 
   const dispatch = useDispatch();
-  const existingField = useSelector(state => state.fields[fieldName]);
-  const wonStatusField = useSelector(state => state.wonStatus.selectedNumber[fieldName]);
+  const existingField = useSelector(state => state.fields[fieldName].numbers);
+  const wonTicketField = useSelector(state => state.wonTicket.selectedNumber[fieldName]);
 
   const addSlot = (numberSlot) => {
     if(existingField.length < rule) {
       dispatch(addSelected({ fieldName, value: numberSlot }));
     }
+    if (existingField.length === rule-1){
+      dispatch(updateStatus({ fieldName, status: true }));
+    }
   }
   const deleteSlot = (numberSlot) => {
-    // setSlot(newSelectedSlots);
+    if (existingField.length === rule){
+      dispatch(updateStatus({ fieldName, status: false }));
+    }
     dispatch(deleteSelected({ fieldName, value: numberSlot }));
   }
   const checkSelectedSlot = (numberSlot) => {
@@ -52,7 +65,7 @@ function FieldSlotsList({ fieldName, option }) {
   }
 
   const checkWonSlot = (numberSlot) => {
-    return wonStatusField.find((num)=> num === numberSlot );
+    return wonTicketField.find((num)=> num === numberSlot );
   }
 
   const renderedSlotsList = [];

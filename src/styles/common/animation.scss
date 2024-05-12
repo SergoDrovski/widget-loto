@@ -1,0 +1,32 @@
+.rotate-modal {
+  animation: rotate-modal .9s forwards;
+}
+
+@keyframes loading-btn {
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+@keyframes rotate-modal {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+
+  50% {
+    transform: scale(1.25) rotateY(90deg);
+  }
+  100% {
+    transform: scale(1) rotateY(180deg);
+  }
+}

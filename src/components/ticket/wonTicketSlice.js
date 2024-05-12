@@ -1,36 +1,57 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { client } from "@/api/client.js"
+// import { client } from "@/api/client.js"
+
+// {
+//   status: 'idle' | 'loading' | 'succeeded' | 'failed',
+//   error: string | null
+// }
 
 const initialState = {
   selectedNumber: {
     firstField: [],
     secondField: []
   },
-  isTicketWon: false
+  isTicketWon: false,
+  status: 'idle',
+  error: null
 }
 
 
-export const wonStatusSlice = createSlice({
-  name: 'wonStatus',
+export const wonTicketSlice = createSlice({
+  name: 'wonTicket',
   initialState,
   reducers: {
-    updateWonStatus(state, action) {
+    updateWonTicket(state, action) {
       return action.payload
+    },
+    clearWonTicket() {
+      return initialState;
+    },
+    updateWonStatus(state, action) {
+      const { status, error } = action.payload
+      state.status = status;
+      if(error) state.error = error;
     }
   }
 })
-export const { updateWonStatus } = wonStatusSlice.actions
-export const fetchWonStatus = (amount) => {
-  return async (dispatch) => {
-    try {
-      const response = await client.post('/api/check',{
-        selectedNumber: {...amount}
-      })
-      dispatch(updateWonStatus(response.data));
-    } catch (err) {
-      // If something went wrong, handle it here
-    }
-  }
-}
+export const {
+  updateWonTicket,
+  updateWonStatus,
+  clearWonTicket
+} = wonTicketSlice.actions
 
-export default wonStatusSlice.reducer
+// export const fetchWonTicket = (amount) => {
+//   return (dispatch) => {
+//     dispatch(updateWonStatus({status: "loading"}))
+//     client.post("/api/check", {
+//       selectedNumber: { ...amount }
+//     }).then(response => {
+//       dispatch(updateWonTicket(response.data))
+//       dispatch(updateWonStatus({status: "succeeded"}))
+//     }).catch(err => {
+//       dispatch(updateWonStatus({status: "failed", error: err}))
+//     })
+//   }
+// }
+
+export default wonTicketSlice.reducer

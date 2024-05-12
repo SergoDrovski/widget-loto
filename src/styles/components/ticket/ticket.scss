@@ -1,6 +1,7 @@
 .ticket {
 
   &__card {
+    position: relative;
     max-width: 440px;
     padding: 0 12px;
     margin: 0 auto;
@@ -116,6 +117,7 @@
     padding: 15px 12px 25px;
   }
   &__button {
+    position: relative;
     display: block;
     max-width: 250px;
     width: 100%;
@@ -138,17 +140,43 @@
       background-color: rgb(255 243 0 / 89%);
       color: #201e2f;
     }
+    &:after {
+      content: "";
+      background-color: rgba(159, 153, 41, 0.7);
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      border-radius: 20px;
+    }
+
+    &.loading:after {
+      animation: loading-btn 1s 1;
+    }
   }
 }
 
 .winner-modal {
-  min-height: 300px;
-  margin-top: 12px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  text-align: center;
+
   &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     padding: 15px 12px 15px;
     border-top: 1px solid #0b0a12;
     background-color: #201e2f;
-    min-height: 300px;
+    width: 100%;
+    height: 100%;
   }
   .title {
     margin-bottom: 20px;

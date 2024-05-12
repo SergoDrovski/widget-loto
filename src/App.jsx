@@ -5,25 +5,15 @@ const configTicket = [
     fieldName: "firstField",
     fieldNumber: 1,
     textRule: "Отметьте 8 чисел.",
-    fieldOption: {
-      lengthSlots: 19,
-      rule: 8,
-      //selectedSlots: [],
-      //setSlot: null,
-      wonStatus: {}
-    }
+    lengthSlots: 19,
+    rule: 8,
   },
   {
     fieldName: "secondField",
     fieldNumber: 2,
     textRule: "Отметьте 1 число.",
-    fieldOption: {
-      lengthSlots: 2,
-      rule: 1,
-      //selectedSlots: [],
-      //setSlot: null,
-      wonStatus: {}
-    }
+    lengthSlots: 2,
+    rule: 1,
   }
 ]
 
