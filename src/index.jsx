@@ -6,7 +6,6 @@ import store from './store';
 import  './api/fakeServer'
 
 import './styles/index.scss';
-import './styles/common/default.scss';
 
 const container = document.getElementById("root")
 
