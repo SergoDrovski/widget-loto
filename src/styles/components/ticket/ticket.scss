@@ -32,6 +32,7 @@
         }
       }
     }
+
     .clue-text {
       position: absolute;
       transform: translateX(180px);
@@ -83,11 +84,13 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     justify-content: space-between;
+
     @media (min-width: 440px) {
       grid-template-columns: repeat(8, 1fr);
       gap: 10px;
     }
   }
+
   .slot {
     display: flex;
     align-items: center;
@@ -104,6 +107,7 @@
       color: #201e2f;
       border: 1px solid rgb(105 100 1 / 74%);
     }
+
     &.won {
       background-color: rgb(147 235 34 / 89%);
       color: #201e2f;
@@ -111,11 +115,11 @@
     }
   }
 
-
   &__button-wrapper {
     background-color: #201e2f;
     padding: 15px 12px 25px;
   }
+
   &__button {
     position: relative;
     display: block;
@@ -169,7 +173,9 @@
   z-index: 0;
   opacity: 0;
   text-align: center;
-  transition: transform 1s, opacity 0.5s;
+  transition:
+    transform 1s,
+    opacity 0.5s;
   transform: translateY(-100%);
 
   &__wrapper {

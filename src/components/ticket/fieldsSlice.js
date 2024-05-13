@@ -12,51 +12,54 @@ const initialState = {
 }
 
 export const fieldsSlice = createSlice({
-  name: 'fields',
+  name: "fields",
   initialState,
   reducers: {
     addSelected(state, action) {
       const { fieldName, value } = action.payload
-      const existingField = state[fieldName];
+      const existingField = state[fieldName]
       if (existingField) {
-        if(value.length) {
-          existingField.numbers = value;
+        if (value.length) {
+          existingField.numbers = value
         } else {
-          existingField.numbers.push(value);
+          existingField.numbers.push(value)
         }
       }
     },
     deleteSelected(state, action) {
       const { fieldName, value } = action.payload
-      const existingField = state[fieldName];
+      const existingField = state[fieldName]
       if (existingField) {
-        state[fieldName].numbers = existingField.numbers.filter((num)=> num !== value );
+        state[fieldName].numbers = existingField.numbers.filter(
+          num => num !== value,
+        )
       }
     },
     clearAllSelected() {
-      return initialState;
+      return initialState
     },
     updateStatus(state, action) {
       const { fieldName, status } = action.payload
-      state[fieldName].status = status;
-    }
+      state[fieldName].status = status
+    },
   },
 })
 
-export const { addSelected, deleteSelected,updateStatus,clearAllSelected } = fieldsSlice.actions
+export const { addSelected, deleteSelected, updateStatus, clearAllSelected } =
+  fieldsSlice.actions
 
-export const selectFieldsNumbers = (state) => {
-  const selectedNumber = {};
+export const selectFieldsNumbers = state => {
+  const selectedNumber = {}
   Object.entries(state.fields).forEach(field => {
-    let nameField = field[0];
-    selectedNumber[nameField] = field[1].numbers;
+    let nameField = field[0]
+    selectedNumber[nameField] = field[1].numbers
   })
-  return selectedNumber;
+  return selectedNumber
 }
 
-export const selectFinalStatus = (state) => {
-  const {firstField, secondField} = state.fields;
-  return firstField.status && secondField.status;
+export const selectFinalStatus = state => {
+  const { firstField, secondField } = state.fields
+  return firstField.status && secondField.status
 }
 
 export default fieldsSlice.reducer

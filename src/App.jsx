@@ -1,4 +1,4 @@
-import TicketCard from './components/ticket/TicketCard';
+import TicketCard from "./components/ticket/TicketCard"
 
 const configTicket = [
   {
@@ -14,18 +14,15 @@ const configTicket = [
     textRule: "Отметьте 1 число.",
     lengthSlots: 2,
     rule: 1,
-  }
+  },
 ]
 
 function App() {
   return (
     <div className="App">
-      <TicketCard
-        ticketNumber={1}
-        config={configTicket}
-      />
+      <TicketCard ticketNumber={1} config={configTicket} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
