@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { client } from "@/api/client.js"
+import { client } from "@/api/client.js"
 
 // {
 //   status: 'idle' | 'loading' | 'succeeded' | 'failed',
@@ -40,18 +40,30 @@ export const {
   clearWonTicket
 } = wonTicketSlice.actions
 
-// export const fetchWonTicket = (amount) => {
-//   return (dispatch) => {
-//     dispatch(updateWonStatus({status: "loading"}))
-//     client.post("/api/check", {
-//       selectedNumber: { ...amount }
-//     }).then(response => {
-//       dispatch(updateWonTicket(response.data))
-//       dispatch(updateWonStatus({status: "succeeded"}))
-//     }).catch(err => {
-//       dispatch(updateWonStatus({status: "failed", error: err}))
-//     })
-//   }
-// }
+
+export const fetchWonTicket = (amount) => {
+  return async (dispatch) => {
+    let counter = 2;
+    let delay = 2000;
+    dispatch(updateWonStatus({status: "loading"}));
+    await fetcher(counter,delay,dispatch,amount);
+  }
+}
+
+export const fetcher = async (counter,delay,dispatch,amount,err = null) => {
+  if(counter === 0) {
+    dispatch(updateWonStatus({ status: "failed", error: err ? err : 'Ой, что-то пошло не так!' }));
+    return
+  }
+  try {
+    let response = await client.post("/api/check", { selectedNumber: { ...amount } })
+    dispatch(updateWonTicket(response.data));
+    dispatch(updateWonStatus({ status: "succeeded" }));
+    counter = 0;
+  } catch (err) {
+    counter--;
+    setTimeout(()=> fetcher(counter,delay,dispatch,amount,err), delay);
+  }
+}
 
 export default wonTicketSlice.reducer

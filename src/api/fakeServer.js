@@ -1,7 +1,7 @@
 import { Server, Response } from 'miragejs'
 import { arrayNumbers } from "@/utils/common.js"
 
-let responseLimit = 2;
+let responseLimit = 1;
 
 const responseTemplates = {
   selectedNumber: {
@@ -54,11 +54,11 @@ new Server({
       }
 
       if(responseLimit <= 0) {
-        responseLimit = 2;
+        responseLimit = 1;
         return new Response(
           400,
           {'Content-Type': 'application/json'},
-          { message: ["something went wrong, please try again"] }
+          { message: "something went wrong, please try again" }
         )
       } else {
         responseLimit--;
