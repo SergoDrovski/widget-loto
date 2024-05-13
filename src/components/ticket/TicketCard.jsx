@@ -18,6 +18,7 @@ export default function TicketCard({ticketNumber, config}) {
   const dispatch = useDispatch();
   const selectedNumber = useSelector(selectFieldsNumbers);
   const fieldsStatus = useSelector(selectFinalStatus);
+  const ticketWonStatus = useSelector(state => state.wonTicket.status);
 
   const handleBtnRandom = () => {
     config.forEach((field) => {
@@ -32,6 +33,7 @@ export default function TicketCard({ticketNumber, config}) {
     dispatch(fetchWonTicket(selectedNumber));
   }
   const checkReady = (setLoading) => {
+    if(ticketWonStatus !== 'idle') return;
     if(fieldsStatus) {
       setLoading(true);
       checkResult();

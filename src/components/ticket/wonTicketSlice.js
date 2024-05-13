@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { client } from "@/api/client.js"
 
-// {
-//   status: 'idle' | 'loading' | 'succeeded' | 'failed',
-//   error: string | null
-// }
+//  status: 'idle' | 'loading' | 'succeeded' | 'failed',
+//  error: string | null
 
 const initialState = {
   selectedNumber: {
@@ -50,7 +48,7 @@ export const fetchWonTicket = (amount) => {
   }
 }
 
-export const fetcher = async (counter,delay,dispatch,amount,err = null) => {
+export async function fetcher(counter,delay,dispatch,amount, err = null)  {
   if(counter === 0) {
     dispatch(updateWonStatus({ status: "failed", error: err ? err : 'Ой, что-то пошло не так!' }));
     return
@@ -62,7 +60,7 @@ export const fetcher = async (counter,delay,dispatch,amount,err = null) => {
     counter = 0;
   } catch (err) {
     counter--;
-    setTimeout(()=> fetcher(counter,delay,dispatch,amount,err), delay);
+    setTimeout(()=> fetcher(...arguments, err), delay);
   }
 }
 
