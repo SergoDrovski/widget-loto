@@ -1,0 +1,38 @@
+@import "fonts";
+@import "normalize";
+
+body {
+  font-family: "Poppins", "Arial", sans-serif;
+  font-size: 16pxpx;
+  line-height: 36px;
+  font-weight: 500;
+  overflow-x: hidden;
+  background-color: #0b0a12;
+  color: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+button {
+  display: block;
+
+  border: none;
+
+  background-color: transparent;
+}
+
+@import "components";
+@import "common";
