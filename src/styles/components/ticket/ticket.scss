@@ -143,29 +143,50 @@
     cursor: pointer;
     overflow: hidden;
 
-    &--disabled {
-      background-color: #535353;
-      color: #7f7d7d;
-    }
     &:hover {
       background-color: rgb(255 243 0 / 89%);
       color: #201e2f;
     }
-    &:after {
-      content: "";
-      background-color: rgba(159, 153, 41, 0.7);
-      display: block;
-      position: absolute;
-      width: 0;
-      height: 100%;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      border-radius: 20px;
+
+    &.loading:hover {
+      background-color: #312e3f;
+      color: #201e2f;
     }
 
-    &.loading:after {
-      animation: loading-btn 1s 1;
+    &.loading span {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      padding: 2px 0;
+    }
+    &.loading span b {
+      animation-direction: alternate;
+      animation-duration: 0.5s;
+      animation-fill-mode: none;
+      animation-iteration-count: infinite;
+      animation-name: stretch;
+      animation-play-state: running;
+      animation-timing-function: ease-out;
+      border-radius: 100%;
+      display: block;
+      height: 12px;
+      width: 12px;
+      animation-delay: 0.1s;
+      margin: 0 5px;
+    }
+    &.loading span b:first-child {
+      animation-delay: 0s;
+      margin: 0;
+    }
+    &.loading span b:last-child {
+      animation-delay: 0.2s;
+      margin: 0;
+    }
+    b {
+      font-weight: normal;
+    }
+    span {
+      display: none;
     }
   }
 }
