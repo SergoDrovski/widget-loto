@@ -1,15 +1,25 @@
-import { useState } from "react"
-
-export default function TicketButton({ handleBtn, btnText }) {
-  const [isLoading, setLoading] = useState(false)
-
+export default function TicketButton({
+  handleBtn,
+  btnText,
+  isLoading,
+  isActive = true,
+}) {
   return (
     <div className="ticket__button-wrapper">
       <button
-        onClick={() => handleBtn(setLoading)}
+        disabled={!isActive}
+        onClick={handleBtn}
         className={`ticket__button ${isLoading ? "loading" : ""}`}
       >
-        {btnText}
+        {isLoading ? (
+          <span>
+            <b></b>
+            <b></b>
+            <b></b>
+          </span>
+        ) : (
+          btnText
+        )}
       </button>
     </div>
   )
